@@ -67,9 +67,9 @@ String stRootPath = RegistryType.LOCAL_REPOSITORY.toString();
 	// switch to user-defined registry tree
 	// verbose method to obtain registry by comparing against custom registry type 
 	String registryType = request.getParameter("registryType");
-	if(registryType != null) { 
+	if (registryType != null) {
 	 	registry = cCtx.getRegistry(RegistryType.valueOf(registryType));
-	 	System.out.println("registry object:"+registry);
+	 	System.out.println("registry object:" + registry);
 		stRootPath = registryType; 
 	} 
 	
@@ -196,9 +196,9 @@ for (Resource oResource : lResource) {  	// iterate over all the registry resour
 <% 
     Association[] arAssociation = registry.getAssociations(oResource.getPath(), "Documentation");
     for (Association oAssociation : arAssociation) {
-    	String stAssociationType 		= oAssociation.getAssociationType();
-    	String stAssociationDestPath 	= oAssociation.getDestinationPath();
-    	String stAssociationSourcePath 	= oAssociation.getSourcePath();
+    	String stAssociationType = oAssociation.getAssociationType();
+    	String stAssociationDestPath = oAssociation.getDestinationPath();
+    	String stAssociationSourcePath = oAssociation.getSourcePath();
  %>
  		<tr><td>Association Type</td><td><%=stAssociationType %></td></tr>
  		<tr><td>Association Destination Path</td>	<td><%=stAssociationDestPath %></td></tr>
@@ -229,13 +229,13 @@ if (iCount == 0) { %>
 	
 	<%
 	String stCacheValue = null;
-	CacheManager cacheManager =   Caching.getCacheManagerFactory().getCacheManager("tsampleCacheManager");
+	CacheManager cacheManager = Caching.getCacheManagerFactory().getCacheManager("tsampleCacheManager");
     Cache<String,String> oCache = cacheManager.getCache("sampleCache");	
  	
     // obtain iterator holding keys for cache entries
  	Iterator<?> iCacheKeys = (Iterator<?>)oCache.keys();
 	iCount = 0;  						// count number of cache name-value pairs found
-	while (iCacheKeys.hasNext() )  {
+	while (iCacheKeys.hasNext()) {
 		stCacheKey = (String)iCacheKeys.next();  // get the next cache key
 		stCacheValue = null;  			// reset value string 
 		iCount++;  					 	// increment the cache entry counter 
@@ -270,15 +270,16 @@ if (iCount == 0) { %>
 		<%
 		 iCount = 0;
          Enumeration<String> keys=session.getAttributeNames();
-                while(keys.hasMoreElements())   {
-                    String name=(String)keys.nextElement();
-                    String value=""+session.getAttribute(name);
-                    iCount++;
+         while(keys.hasMoreElements())   {
+             String name = (String)keys.nextElement();
+             String value= "" + session.getAttribute(name);
+             iCount++;
   		%>
-  					<tr>
-  						<td><%=name%></td>	<td><%=value%></td>
-				  	</tr>
-		<%     	 }   // end of while loop    
+  		     <tr>
+  			     <td><%=name%></td>	<td><%=value%></td>
+			 </tr>
+		<%
+		}   // end of while loop
 		if (iCount == 0) { %>
 			<tr><td colspan=2 align='center'>No session objects found</td></tr>
 		<%
@@ -292,14 +293,14 @@ if (iCount == 0) { %>
 		<tr><td align='center'>Header Key Name</td><td align='center'>Header Value</td></tr>
 			<% 	
 			Enumeration<String> headerNames = request.getHeaderNames();
-				while (headerNames.hasMoreElements()) {
-					String headerName = headerNames.nextElement();
-					String headerValue = request.getHeader(headerName);		
+			while (headerNames.hasMoreElements()) {
+			    String headerName = headerNames.nextElement();
+			    String headerValue = request.getHeader(headerName);
 			%>		
-					<tr>
-						<td><%=headerName%></td>	<td><%=headerValue%></td>
-					</tr>
-		<%			}   %>
+				<tr>
+				    <td><%=headerName%></td>	<td><%=headerValue%></td>
+				</tr>
+		<%  }   %>
 	</table>
 
 
